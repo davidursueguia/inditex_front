@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Card} from "@mui/material";
 import PodcastService from "../../services/PodcastService.ts";
 import {RESPONSE} from "../../services/api.ts";
+import {Link} from "react-router-dom";
 
 const PodcastList = () => {
 
@@ -72,10 +73,12 @@ const PodcastList = () => {
                             alt={podcast.name}
                             src={podcast.artworkUrl100}
                         />
-                        <div style={{display: 'grid', gap: '10px'}}>
-                            <span>{podcast.name}</span>
-                            <span>{`Author: ${podcast.artistName}`}</span>
-                        </div>
+                        <Link to={/podcast/ + podcast.id}>
+                            <div style={{display: 'grid', gap: '10px'}}>
+                                <span>{podcast.name}</span>
+                                <span>{`Author: ${podcast.artistName}`}</span>
+                            </div>
+                        </Link>
                     </Card>
 
 
