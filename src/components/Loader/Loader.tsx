@@ -11,8 +11,8 @@ class Loader extends Component {
                 ariaLabel="color-ring-loading"
                 wrapperStyle={{}}
                 wrapperClass="color-ring-wrapper"
-                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-            />
+                colors = {['#1e3a8a', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd']}
+        />
         );
     }
 }
