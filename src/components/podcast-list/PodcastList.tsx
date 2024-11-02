@@ -1,31 +1,11 @@
-import {useEffect, useState} from "react";
-import {Card} from "@mui/material";
-import PodcastService from "../../services/PodcastService.ts";
-import {RESPONSE} from "../../services/api.ts";
+import {useTopPodcasts} from "../../hooks/useTopPodcasts.ts";
 import {Link} from "react-router-dom";
+import {Card} from "@mui/material";
+import {Podcast} from "../../interfaces/Podcast.ts";
 
 const PodcastList = () => {
 
-    const [podcasts, setPodcasts] = useState([]);
-
-    useEffect(() => {
-        try {
-            //fetchPodcasts();
-            // @ts-expect-error
-            setPodcasts(RESPONSE.feed.results);
-        } catch (error) {
-            console.error('Error fetching top podcasts:', error);
-        }
-
-    }, []);
-
-    const fetchPodcasts = () => {
-        console.log('Fetching top podcasts...');
-        PodcastService.getTopPodcasts().then((result: any) => {
-            console.log('Podcasts fetched:', result);
-            setPodcasts(result.feed.results);
-        });
-    }
+    const {data: podcasts} = useTopPodcasts();
 
     return (
         <div style={{
@@ -41,9 +21,9 @@ const PodcastList = () => {
                 gap: '100px',
                 padding: '10px',
             }}>
-                {podcasts && podcasts.map((podcast: any) => (
+                {podcasts?.map((podcast: Podcast) => (
                     <Card
-                        key={podcast.id}
+                        key={podcast.id.attributes["im:id"]}
                         sx={{
                             ':hover': {
                                 boxShadow: 20,
@@ -70,18 +50,16 @@ const PodcastList = () => {
                                 transform: 'translate(-50%, -50%)',
                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
                             }}
-                            alt={podcast.name}
-                            src={podcast.artworkUrl100}
+                            alt={podcast["im:name"].label}
+                            src={podcast["im:image"][0].label}
                         />
-                        <Link to={/podcast/ + podcast.id}>
+                        <Link to={/podcast/ + podcast.id.attributes["im:id"]}>
                             <div style={{display: 'grid', gap: '10px'}}>
-                                <span>{podcast.name}</span>
-                                <span>{`Author: ${podcast.artistName}`}</span>
+                                <span>{podcast.title.label}</span>
+                                <span>{`Author: ${podcast["im:artist"].label}`}</span>
                             </div>
                         </Link>
                     </Card>
-
-
                 ))}
             </div>
         </div>

@@ -1,17 +1,15 @@
 import axios from 'axios';
 
-const API_BASE = 'https://allorigins.win';
-
 class PodcastService {
     static async getTopPodcasts(): Promise<any> {
         try {
-            const url = `${API_BASE}${encodeURIComponent(
-                'https://rss.applemarketingtools.com/api/v2/us/podcasts/top/100/podcasts.json'
-            )}`;
+            const url = `${
+                'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
+            }`;
             const response = await axios.get(url);
 
-            if (response.data && response.data.contents) {
-                return JSON.parse(response.data.contents);
+            if (response.data) {
+                return response.data.feed.entry;
             } else {
                 throw new Error('No contents in response');
             }
@@ -23,7 +21,7 @@ class PodcastService {
 
     static async getPodcastDetail(podcastId: string): Promise<any> {
         try {
-            const url = `${API_BASE}${encodeURIComponent(
+            const url = `${encodeURIComponent(
                 `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
             )}`;
             const response = await axios.get(url);
