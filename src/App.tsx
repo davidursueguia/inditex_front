@@ -4,6 +4,7 @@ import Header from "./components/header/Header.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PodcastDetail from "./components/podcast-detail/PodcastDetail.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const App = () => {
                     <Route path="/" element={<PodcastList/>}/>
                     <Route path="/podcast/:id" element={<PodcastDetail/>}/>
                 </Routes>
+                <ReactQueryDevtools/>
             </QueryClientProvider>
         </BrowserRouter>
     );

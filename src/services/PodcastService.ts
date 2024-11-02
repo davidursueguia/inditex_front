@@ -21,9 +21,9 @@ class PodcastService {
 
     static async getPodcastDetail(podcastId: string): Promise<any> {
         try {
-            const url = `${encodeURIComponent(
+            const url = `${
                 `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
-            )}`;
+            }`;
             const response = await axios.get(url);
 
             if (response.data && response.data.contents) {
