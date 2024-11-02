@@ -56,7 +56,7 @@ const PodcastList = (props: Props) => {
                             />
                             <Link to={/podcast/ + podcast.id.attributes["im:id"]}>
                                 <div style={{display: 'grid', gap: '10px'}}>
-                                    <span>{podcast.title.label}</span>
+                                    <span>{podcast["im:name"].label}</span>
                                     <span>{`Author: ${podcast["im:artist"].label}`}</span>
                                 </div>
                             </Link>
