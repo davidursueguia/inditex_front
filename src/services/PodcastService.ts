@@ -26,8 +26,9 @@ class PodcastService {
             }`;
             const response = await axios.get(url);
 
-            if (response.data && response.data.contents) {
-                return JSON.parse(response.data.contents);
+            if (response.data) {
+                console.log('getPodcastDetail', response.data);
+                return response.data;
             } else {
                 throw new Error('No contents in response');
             }
