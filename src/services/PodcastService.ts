@@ -1,12 +1,20 @@
 import axios from 'axios';
 
+const isProd = import.meta.env.MODE === 'production';
+const origin = isProd ? import.meta.env.VITE_API_ORIGIN_PROD : import.meta.env.VITE_API_ORIGIN;
+
 class PodcastService {
     static async getTopPodcasts(): Promise<any> {
         try {
             const url = `${
-                'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
+                'https://cors-anywhere.herokuapp.com/https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
             }`;
-            const response = await axios.get(url);
+            const response = await axios.get(url, {
+                headers: {
+                    'Origin': origin,
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
 
             if (response.data) {
                 return response.data.feed.entry;

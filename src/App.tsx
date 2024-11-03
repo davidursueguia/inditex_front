@@ -3,7 +3,6 @@ import Header from "./components/header/Header.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PodcastDetail from "./components/podcast-detail/PodcastDetail.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from "react-query/devtools";
 import PodcastPage from "./components/pages/PodcastPage.tsx";
 import {PodcastEpisodeDetail} from "./components/podcast-episode-detail/PodcastEpisodeDetail.tsx";
 
@@ -19,7 +18,6 @@ const App = () => {
                     <Route path="/podcast/:podcastId" element={<PodcastDetail/>}/>
                     <Route path="/podcast/:podcastId/episode/:episodeId" element={<PodcastEpisodeDetail />}/>
                 </Routes>
-                <ReactQueryDevtools/>
             </QueryClientProvider>
         </BrowserRouter>
     );

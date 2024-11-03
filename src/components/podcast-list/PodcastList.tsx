@@ -18,7 +18,7 @@ const PodcastList = (props: Props) => {
             }}>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gridTemplateColumns: 'repeat(5, 1fr)',
                     gap: '100px',
                     padding: '10px',
                 }}>
@@ -56,8 +56,8 @@ const PodcastList = (props: Props) => {
                             />
                             <Link to={/podcast/ + podcast.id.attributes["im:id"]}>
                                 <div style={{display: 'grid', gap: '10px'}}>
-                                    <span>{podcast["im:name"].label}</span>
-                                    <span>{`Author: ${podcast["im:artist"].label}`}</span>
+                                    <span style={{color: 'black'}}>{podcast["im:name"].label.toUpperCase()}</span>
+                                    <span style={{color: 'grey'}}>{`Author: ${podcast["im:artist"].label}`}</span>
                                 </div>
                             </Link>
                         </Card>
