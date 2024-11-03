@@ -20,15 +20,23 @@ export const PodcastEpisodeDetail = () => {
         }}>
             <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading}/>
             <Card style={{height: 'fit-content'}}>
-                <h3 style={{marginLeft: '10px', textAlign: 'left', fontSize: '1.2em', color: '#333'}}>
-                    {episode?.trackName}
-                </h3>
-                <Separator/>
-                <p style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
-                    {episode?.shortDescription}
-                </p>
-                <Separator/>
-                <PodcastPlayer episode={episode}/>
+                {episode ? (
+                    <>
+                        <h3 style={{marginLeft: '10px', textAlign: 'left', fontSize: '1.2em', color: '#333'}}>
+                            {episode.trackName}
+                        </h3>
+                        <Separator/>
+                        <p style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
+                            {episode.shortDescription}
+                        </p>
+                        <Separator/>
+                        <PodcastPlayer episode={episode}/>
+                    </>
+                ) : (
+                    <div style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
+                        Loading episode details...
+                    </div>
+                )}
             </Card>
         </div>
     );
