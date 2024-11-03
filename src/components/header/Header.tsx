@@ -1,4 +1,4 @@
-import Loader from "../Loader/Loader.tsx";
+import Loader from "../loader/Loader.tsx";
 import {Link} from "react-router-dom";
 const Header = () => {
     return (
