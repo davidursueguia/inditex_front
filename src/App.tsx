@@ -5,6 +5,7 @@ import PodcastDetail from "./components/podcast-detail/PodcastDetail.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
 import PodcastPage from "./components/pages/PodcastPage.tsx";
+import {PodcastEpisodeDetail} from "./components/podcast-episode-detail/PodcastEpisodeDetail.tsx";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,8 @@ const App = () => {
                 <Header/>
                 <Routes>
                     <Route path="/" element={<PodcastPage/>}/>
-                    <Route path="/podcast/:id" element={<PodcastDetail/>}/>
+                    <Route path="/podcast/:podcastId" element={<PodcastDetail/>}/>
+                    <Route path="/podcast/:podcastId/episode/:episodeId" element={<PodcastEpisodeDetail />}/>
                 </Routes>
                 <ReactQueryDevtools/>
             </QueryClientProvider>

@@ -7,38 +7,19 @@ import {
     TableHead,
     Skeleton
 } from "@mui/material";
-import Separator from "../ui/separator/Separator.tsx";
 import {formatDate, formatMillisecondsToMinutesSeconds} from "../../dateTimeUtils.ts";
 import {usePodcastData} from "../../hooks/usePodcastData.ts";
 import {StyledTableCell, StyledTableRow} from "./styles.ts";
+import {Link, useLocation} from "react-router-dom";
+import PodcastInfoCard from "../podcast-info-card/PodcastInfoCard.tsx";
 
 const PodcastDetail = () => {
+    const location = useLocation();
     const {selectedPodcast, podcastEpisodes, isLoading} = usePodcastData();
 
     return (
         <div style={{display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '20px', padding: '20px'}}>
-            <Card style={{height: 'fit-content', padding: '20px', borderRadius: '8px'}}>
-                {isLoading ? (
-                    <Skeleton variant="rectangular" width="100%" height={200}/>
-                ) : (
-                    selectedPodcast && (
-                        <div style={{textAlign: 'center'}}>
-                            <img
-                                alt={selectedPodcast["im:name"].label}
-                                src={selectedPodcast["im:image"][2].label}
-                                style={{width: '100%', maxWidth: '200px', borderRadius: '8px', marginBottom: '15px'}}
-                            />
-                            <Separator/>
-                            <h2 style={{fontSize: '1.5em', color: '#333', margin: '10px 0'}}>
-                                {selectedPodcast.title.label}
-                            </h2>
-                            <p style={{color: '#666'}}>by {selectedPodcast["im:artist"].label}</p>
-                            <Separator/>
-                            <p style={{fontSize: '1em', color: '#666'}}>{selectedPodcast.summary.label}</p>
-                        </div>
-                    )
-                )}
-            </Card>
+            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading} />
             <div style={{display: 'grid', alignContent: 'baseline', gap: '20px'}}>
                 <Card style={{borderRadius: '8px'}}>
                     <h3 style={{marginLeft: '10px', textAlign: 'left', fontSize: '1.2em', color: '#333'}}>
@@ -75,7 +56,8 @@ const PodcastDetail = () => {
                                         key={row.trackId}
                                     >
                                         <StyledTableCell component="th" scope="row">
-                                            {row.trackName}
+                                            <Link
+                                                to={`${location.pathname}/episode/${row.trackId}`}>{row.trackName}</Link>
                                         </StyledTableCell>
                                         <StyledTableCell align="right">{formatDate(row.releaseDate)}</StyledTableCell>
                                         <StyledTableCell

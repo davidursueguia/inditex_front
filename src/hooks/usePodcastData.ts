@@ -13,7 +13,7 @@ interface UsePodcastDataResult {
 }
 
 export const usePodcastData = (): UsePodcastDataResult => {
-    const {id} = useParams<{ id: string }>();
+    const {podcastId: id} = useParams<{ podcastId: string }>();
     const [selectedPodcast, setSelectedPodcast] = useState<Podcast>();
     const [podcastEpisodes, setPodcastEpisodes] = useState<PodcastEpisode[]>();
 
