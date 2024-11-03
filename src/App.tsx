@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PodcastDetail from "./components/podcast-detail/PodcastDetail.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
-import PodcastPage from "./components/podcast-page/PodcastPage.tsx";
+import PodcastPage from "./components/pages/PodcastPage.tsx";
 
 const queryClient = new QueryClient();
 
