@@ -3,12 +3,12 @@ import axios from 'axios';
 const isProd = import.meta.env.MODE === 'production';
 const origin = isProd ? import.meta.env.VITE_API_ORIGIN_PROD : import.meta.env.VITE_API_ORIGIN;
 
+const baseUrl = 'https://cors-anywhere.herokuapp.com/'; //All origins no funciona en el momento de hacer la prueba. Paso a usar el servicio de cors-anywhere
+
 class PodcastService {
     static async getTopPodcasts(): Promise<any> {
         try {
-            const url = `${
-                'https://cors-anywhere.herokuapp.com/https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
-            }`;
+            const url = `${baseUrl}https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json`;
             const response = await axios.get(url, {
                 headers: {
                     'Origin': origin,
@@ -29,10 +29,13 @@ class PodcastService {
 
     static async getPodcastDetail(podcastId: string): Promise<any> {
         try {
-            const url = `${
-                `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
-            }`;
-            const response = await axios.get(url);
+            const url = `${baseUrl}https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
+            const response = await axios.get(url, {
+                headers: {
+                    'Origin': origin,
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
 
             if (response.data) {
                 return response.data;
