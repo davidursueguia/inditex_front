@@ -1,7 +1,7 @@
 import {ColorRing} from "react-loader-spinner";
 import {useIsFetching} from "react-query";
 
-const Loader = () => {
+const Status = () => {
 
     const isFetching = useIsFetching();
 
@@ -19,4 +19,4 @@ const Loader = () => {
 
 }
 
-export default Loader;
+export default Status;
