@@ -1,5 +1,6 @@
 import Loader from "../loader/Loader.tsx";
 import {Link} from "react-router-dom";
+import Separator from "../ui/separator/Separator.tsx";
 const Header = () => {
     return (
         <>
@@ -7,7 +8,7 @@ const Header = () => {
                 <Link to={'/'}><span id={'title'}>Podcaster</span></Link>
                 <Loader/>
             </div>
-            <div id={'separator'} style={{backgroundColor: 'black', width: '100%', height: '3px'}}/>
+            <Separator/>
         </>
     );
 
