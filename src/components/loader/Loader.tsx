@@ -1,13 +1,13 @@
 import {ColorRing} from "react-loader-spinner";
-import {useTopPodcasts} from "../../hooks/useTopPodcasts.ts";
+import {useIsFetching} from "react-query";
 
 const Loader = () => {
 
-    const {isLoading} = useTopPodcasts();
+    const isFetching = useIsFetching();
 
     return (
         <ColorRing
-            visible={isLoading}
+            visible={isFetching > 0}
             height="40"
             width="40"
             ariaLabel="color-ring-loading"
