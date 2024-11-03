@@ -5,11 +5,16 @@ import {usePodcastData} from "../../hooks/usePodcastData.ts";
 import {Card} from "@mui/material";
 import Separator from "../ui/separator/Separator.tsx";
 import {PodcastPlayer} from "../podcast-player/PodcastPlayer.tsx";
+import {useEffect} from "react";
 
 export const PodcastEpisodeDetail = () => {
     const {podcastId = "", episodeId = ""} = useParams<{ podcastId: string; episodeId: string }>();
     const {selectedPodcast, isLoading} = usePodcastData();
     const {episode} = usePodcastEpisodeData(podcastId, episodeId);
+
+    useEffect(() => {
+        console.log('selected episode:', episode);
+    }, [episode]);
 
     return (
         <div style={{
@@ -27,7 +32,7 @@ export const PodcastEpisodeDetail = () => {
                         </h3>
                         <Separator/>
                         <p style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
-                            {episode.shortDescription}
+                            {episode.shortDescription ? episode.shortDescription : episode.description}
                         </p>
                         <Separator/>
                         <PodcastPlayer episode={episode}/>

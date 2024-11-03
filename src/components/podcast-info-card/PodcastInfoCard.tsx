@@ -10,6 +10,7 @@ interface Props {
 
 const PodcastInfoCard = (props: Props) => {
     const {selectedPodcast, isLoading} = props;
+
     return (
         <Card style={{height: 'fit-content', padding: '20px', borderRadius: '8px'}}>
             {isLoading ? (
@@ -24,13 +25,16 @@ const PodcastInfoCard = (props: Props) => {
                                 style={{width: '100%', maxWidth: '200px', borderRadius: '8px', marginBottom: '15px'}}
                             />
                             <Separator/>
-                            <h2 style={{fontSize: '1.5em', color: '#333', margin: '10px 0'}}>
-                                {selectedPodcast.title.label}
-                            </h2>
-                            <p style={{color: '#666'}}>by {selectedPodcast["im:artist"].label}</p>
+                            <div style={{textAlign: 'left'}}>
+                                <h2 style={{fontSize: '1.5em', color: '#333', margin: '10px 0'}}>
+                                    {selectedPodcast["im:name"].label}
+                                </h2>
+                                <p style={{color: '#666', fontStyle: 'italic'}}>by {selectedPodcast["im:artist"].label}</p>
+                            </div>
                         </Link>
                         <Separator/>
-                        <p style={{fontSize: '1em', color: '#666'}}>{selectedPodcast.summary.label}</p>
+                        <h3 style={{textAlign: 'left'}}>Description:</h3>
+                        <p style={{fontSize: '1em', fontStyle: 'italic', color: '#666'}}>{selectedPodcast.summary.label}</p>
                     </div>
                 )
             )}
