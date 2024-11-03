@@ -3,15 +3,14 @@ import {
     Paper,
     Table,
     TableBody,
-    TableCell,
     TableContainer,
     TableHead,
-    TableRow,
     Skeleton
 } from "@mui/material";
 import Separator from "../ui/separator/Separator.tsx";
 import {formatDate, formatMillisecondsToMinutesSeconds} from "../../dateTimeUtils.ts";
 import {usePodcastData} from "../../hooks/usePodcastData.ts";
+import {StyledTableCell, StyledTableRow} from "./styles.ts";
 
 const PodcastDetail = () => {
     const {selectedPodcast, podcastEpisodes, isLoading} = usePodcastData();
@@ -47,42 +46,41 @@ const PodcastDetail = () => {
                     </h3>
                 </Card>
                 <TableContainer component={Paper}>
-                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <Table>
                         <TableHead>
-                            <TableRow>
-                                <TableCell align={'left'}>Title</TableCell>
-                                <TableCell align="right">Date</TableCell>
-                                <TableCell align="right">Duration</TableCell>
-                            </TableRow>
+                            <StyledTableRow>
+                                <StyledTableCell align={'left'}>Title</StyledTableCell>
+                                <StyledTableCell align="right">Date</StyledTableCell>
+                                <StyledTableCell align="right">Duration</StyledTableCell>
+                            </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {isLoading ? (
                                 Array.from(new Array(5)).map((_, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>
+                                    <StyledTableRow key={index}>
+                                        <StyledTableCell>
                                             <Skeleton/>
-                                        </TableCell>
-                                        <TableCell align="right">
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
                                             <Skeleton/>
-                                        </TableCell>
-                                        <TableCell align="right">
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
                                             <Skeleton/>
-                                        </TableCell>
-                                    </TableRow>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
                                 ))
                             ) : (
                                 podcastEpisodes && podcastEpisodes.map((row) => (
-                                    <TableRow
+                                    <StyledTableRow
                                         key={row.trackId}
-                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                     >
-                                        <TableCell component="th" scope="row">
+                                        <StyledTableCell component="th" scope="row">
                                             {row.trackName}
-                                        </TableCell>
-                                        <TableCell align="right">{formatDate(row.releaseDate)}</TableCell>
-                                        <TableCell
-                                            align="right">{formatMillisecondsToMinutesSeconds(row.trackTimeMillis)}</TableCell>
-                                    </TableRow>
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">{formatDate(row.releaseDate)}</StyledTableCell>
+                                        <StyledTableCell
+                                            align="right">{formatMillisecondsToMinutesSeconds(row.trackTimeMillis)}</StyledTableCell>
+                                    </StyledTableRow>
                                 ))
                             )}
                         </TableBody>
