@@ -1,21 +1,32 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Card} from "@mui/material";
-import {PodcastEpisode} from "../../interfaces/PodcastEpisode.ts";
-import {useTopPodcasts} from "../../hooks/useTopPodcasts.ts";
-import {Podcast} from "../../interfaces/Podcast.ts";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import {
+    Card,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Skeleton
+} from "@mui/material";
+import { PodcastEpisode } from "../../interfaces/PodcastEpisode.ts";
+import { useTopPodcasts } from "../../hooks/useTopPodcasts.ts";
+import { Podcast } from "../../interfaces/Podcast.ts";
 import Separator from "../ui/separator/Separator.tsx";
-import {usePodcastDetails} from "../../hooks/usePodcastDetails.ts";
+import { usePodcastDetails } from "../../hooks/usePodcastDetails.ts";
+import { formatDate, formatMillisecondsToMinutesSeconds } from "../../dateTimeUtils.ts";
 
 const PodcastDetail = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [selectedPodcast, setSelectedPodcast] = useState<Podcast>();
-    const {data: podcasts} = useTopPodcasts();
+    const { data: podcasts } = useTopPodcasts();
     const podcastDetails = usePodcastDetails(id ? id : '');
     const [podcastEpisodes, setPodcastEpisodes] = useState<PodcastEpisode[]>();
 
     useEffect(() => {
-        if (id && podcastDetails) {
+        if (id && podcasts && podcastDetails.data && podcastDetails.data.results) {
             setSelectedPodcast(podcasts.find((podcast: Podcast) => podcast.id.attributes["im:id"] === id));
             setPodcastEpisodes(podcastDetails.data.results);
             console.log(podcastDetails.data.results);
@@ -23,30 +34,76 @@ const PodcastDetail = () => {
     }, [id, podcastDetails, podcasts]);
 
     return (
-        <div style={{display: 'grid', gridTemplateColumns: '1fr 2fr'}}>
-            <Card>
-                {selectedPodcast && (
-                    <div>
-                        <img alt={selectedPodcast["im:name"].label}
-                             src={selectedPodcast["im:image"][2].label}/>
-                        <Separator/>
-                        {selectedPodcast.title.label} by {selectedPodcast["im:artist"].label}
-                        <Separator/>
-                        {selectedPodcast.summary.label}
-                    </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '20px', padding: '20px' }}>
+            <Card style={{height: 'fit-content', padding: '20px', borderRadius: '8px' }}>
+                {podcastDetails.isLoading ? (
+                    <Skeleton variant="rectangular" width="100%" height={200} />
+                ) : (
+                    selectedPodcast && (
+                        <div style={{ textAlign: 'center' }}>
+                            <img
+                                alt={selectedPodcast["im:name"].label}
+                                src={selectedPodcast["im:image"][2].label}
+                                style={{ width: '100%', maxWidth: '200px', borderRadius: '8px', marginBottom: '15px' }}
+                            />
+                            <Separator />
+                            <h2 style={{ fontSize: '1.5em', color: '#333', margin: '10px 0' }}>
+                                {selectedPodcast.title.label}
+                            </h2>
+                            <p style={{ color: '#666' }}>by {selectedPodcast["im:artist"].label}</p>
+                            <Separator />
+                            <p style={{ fontSize: '1em', color: '#666' }}>{selectedPodcast.summary.label}</p>
+                        </div>
+                    )
                 )}
             </Card>
-            <div>
-                <Card>
-                    {'Episodes ' + podcastEpisodes?.length}
+            <div style={{ display: 'grid', alignContent: 'baseline', gap: '20px' }}>
+                <Card style={{ borderRadius: '8px' }}>
+                    <h3 style={{ marginLeft: '10px', textAlign: 'left', fontSize: '1.2em', color: '#333' }}>
+                        {'Episodes: ' + (podcastEpisodes?.length || 0)}
+                    </h3>
                 </Card>
-                <Card>
-                    {podcastEpisodes?.map((episode: PodcastEpisode) => (
-                        <div>
-                            {episode.trackName}
-                        </div>
-                    ))}
-                </Card>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align={'left'}>Title</TableCell>
+                                <TableCell align="right">Date</TableCell>
+                                <TableCell align="right">Duration</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {podcastDetails.isLoading ? (
+                                Array.from(new Array(5)).map((_, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell>
+                                            <Skeleton />
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Skeleton />
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Skeleton />
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                podcastEpisodes && podcastEpisodes.map((row) => (
+                                    <TableRow
+                                        key={row.trackId}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {row.trackName}
+                                        </TableCell>
+                                        <TableCell align="right">{formatDate(row.releaseDate)}</TableCell>
+                                        <TableCell align="right">{formatMillisecondsToMinutesSeconds(row.trackTimeMillis)}</TableCell>
+                                    </TableRow>
+                                ))
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
         </div>
     );
