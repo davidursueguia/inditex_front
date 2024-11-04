@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "baseUrl": "src",
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "~": ["./src"],
+    },
+    "strictNullChecks": true,
+    "target": "ESNext",
+    "types": ["cypress", "jest", "vite/client", "vite-plugin-svgr/client", "node", "@testing-library/jest-dom"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -9,12 +15,14 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
+    "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "types": ["cypress", "jest", "vite/client", "@testing-library/jest-dom"]
 }
