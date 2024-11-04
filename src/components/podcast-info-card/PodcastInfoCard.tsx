@@ -2,7 +2,7 @@ import { Skeleton} from "@mui/material";
 import Separator from "../ui/separator/Separator.tsx";
 import {Podcast} from "../../interfaces/Podcast.ts";
 import {Link} from "react-router-dom";
-import {Artist, DescriptionText, DescriptionTitle, StyledCard, Title} from "./styles.ts";
+import {Artist, DescriptionText, DescriptionTitle, PodcastImage, StyledCard, Title} from "./styles.ts";
 
 interface Props {
     selectedPodcast: Podcast | undefined;
@@ -20,10 +20,9 @@ const PodcastInfoCard = (props: Props) => {
                 selectedPodcast && (
                     <div style={{ textAlign: 'center' }}>
                         <Link to={'/podcast/' + selectedPodcast.id.attributes["im:id"]}>
-                            <img
+                            <PodcastImage
                                 alt={selectedPodcast["im:name"].label}
                                 src={selectedPodcast["im:image"][2].label}
-                                style={{width: '100%', maxWidth: '200px', borderRadius: '8px', marginBottom: '15px'}}
                             />
                             <Separator/>
                             <div style={{textAlign: 'left'}}>

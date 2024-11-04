@@ -7,6 +7,13 @@ export const StyledCard = styled(Card)`
     border-radius: 8px;
 `;
 
+export const PodcastImage = styled('img')`
+    width: 100%;
+    max-width: 200px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+`;
+
 export const Title = styled('h2')`
     font-size: 1.5em;
     color: #333;
