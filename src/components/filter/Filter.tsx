@@ -1,4 +1,5 @@
 import {Chip, TextField} from "@mui/material";
+import {Container} from "./styles.ts";
 
 interface Props {
     filterText: string;
@@ -9,22 +10,14 @@ interface Props {
 const Filter = (props: Props) => {
 
     return (
-        <div style={{
-            float: "right",
-            marginTop: "10px",
-            marginRight: "10px",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "10px"
-        }}>
+        <Container>
             <Chip color="info" label={props.filteredCount}/>
             <TextField
                 label={'Filter podcasts...'}
                 variant={'outlined'}
                 value={props.filterText}
                 onChange={(e) => props.setFilterText(e.target.value)}/>
-        </div>
+        </Container>
     );
 
 }
