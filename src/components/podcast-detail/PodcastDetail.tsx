@@ -1,5 +1,4 @@
 import {
-    Card,
     Paper,
     Table,
     TableBody,
@@ -18,7 +17,7 @@ import {
     StyledTableRow,
     Title
 } from "./styles.ts";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import PodcastInfoCard from "../podcast-info-card/PodcastInfoCard.tsx";
 
 const PodcastDetail = () => {
@@ -27,7 +26,7 @@ const PodcastDetail = () => {
 
     return (
         <Container>
-            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading} />
+            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading}/>
             <EpisodesContainer>
                 <EpisodesCard>
                     <Title>{'Episodes: ' + (podcastEpisodes?.length || 0)}</Title>
@@ -46,13 +45,13 @@ const PodcastDetail = () => {
                                 Array.from(new Array(5)).map((_, index) => (
                                     <StyledTableRow key={index}>
                                         <StyledTableCell>
-                                            <Skeleton />
+                                            <Skeleton/>
                                         </StyledTableCell>
                                         <StyledTableCell align="right">
-                                            <Skeleton />
+                                            <Skeleton/>
                                         </StyledTableCell>
                                         <StyledTableCell align="right">
-                                            <Skeleton />
+                                            <Skeleton/>
                                         </StyledTableCell>
                                     </StyledTableRow>
                                 ))

@@ -6,43 +6,31 @@ import {Card} from "@mui/material";
 import Separator from "../ui/separator/Separator.tsx";
 import {PodcastPlayer} from "../podcast-player/PodcastPlayer.tsx";
 import {useEffect} from "react";
+import {Container, EpisodeCard, EpisodeDescription, EpisodeTitle, LoadingMessage} from "./styles.ts";
 
 export const PodcastEpisodeDetail = () => {
     const {podcastId = "", episodeId = ""} = useParams<{ podcastId: string; episodeId: string }>();
     const {selectedPodcast, isLoading} = usePodcastData();
     const {episode} = usePodcastEpisodeData(podcastId, episodeId);
 
-    useEffect(() => {
-        console.log('selected episode:', episode);
-    }, [episode]);
-
     return (
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 3fr',
-            gap: '20px',
-            padding: '20px'
-        }}>
-            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading}/>
-            <Card style={{height: 'fit-content'}}>
+        <Container>
+            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading} />
+            <EpisodeCard>
                 {episode ? (
                     <>
-                        <h3 style={{marginLeft: '10px', textAlign: 'left', fontSize: '1.2em', color: '#333'}}>
-                            {episode.trackName}
-                        </h3>
-                        <Separator/>
-                        <p style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
+                        <EpisodeTitle>{episode.trackName}</EpisodeTitle>
+                        <Separator />
+                        <EpisodeDescription>
                             {episode.shortDescription ? episode.shortDescription : episode.description}
-                        </p>
-                        <Separator/>
-                        <PodcastPlayer episode={episode}/>
+                        </EpisodeDescription>
+                        <Separator />
+                        <PodcastPlayer episode={episode} />
                     </>
                 ) : (
-                    <div style={{marginLeft: '10px', textAlign: 'left', fontSize: '1em', color: '#333'}}>
-                        Loading episode details...
-                    </div>
+                    <LoadingMessage>Loading episode details...</LoadingMessage>
                 )}
-            </Card>
-        </div>
+            </EpisodeCard>
+        </Container>
     );
 };
