@@ -1,7 +1,7 @@
 import Status from "../status/Status.tsx";
 import {Link} from "react-router-dom";
-import Separator from "../ui/separator/Separator.tsx";
 import {HeaderContainer} from "./styles.ts";
+import {Separator} from "../ui/separator/styled.ts";
 
 const Header = () => {
     return (

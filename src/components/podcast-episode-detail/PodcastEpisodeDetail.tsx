@@ -2,11 +2,9 @@ import {useParams} from "react-router-dom";
 import {usePodcastEpisodeData} from "../../hooks/usePodcastEpisodeData";
 import PodcastInfoCard from "../podcast-info-card/PodcastInfoCard.tsx";
 import {usePodcastData} from "../../hooks/usePodcastData.ts";
-import {Card} from "@mui/material";
-import Separator from "../ui/separator/Separator.tsx";
 import {PodcastPlayer} from "../podcast-player/PodcastPlayer.tsx";
-import {useEffect} from "react";
 import {Container, EpisodeCard, EpisodeDescription, EpisodeTitle, LoadingMessage} from "./styles.ts";
+import {Separator} from "../ui/separator/styled.ts";
 
 export const PodcastEpisodeDetail = () => {
     const {podcastId = "", episodeId = ""} = useParams<{ podcastId: string; episodeId: string }>();

@@ -26,7 +26,7 @@ export const StyledCard = styled(Card)`
     padding-top: 60px;
 
     &:hover {
-        box-shadow: 20;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     }
 `;
 

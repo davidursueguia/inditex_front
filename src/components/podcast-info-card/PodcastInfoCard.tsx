@@ -1,8 +1,8 @@
 import { Skeleton} from "@mui/material";
-import Separator from "../ui/separator/Separator.tsx";
 import {Podcast} from "../../interfaces/Podcast.ts";
 import {Link} from "react-router-dom";
 import {Artist, DescriptionText, DescriptionTitle, PodcastImage, StyledCard, Title} from "./styles.ts";
+import {Separator} from "../ui/separator/styled.ts";
 
 interface Props {
     selectedPodcast: Podcast | undefined;
