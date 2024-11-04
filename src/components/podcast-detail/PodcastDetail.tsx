@@ -7,7 +7,7 @@ import {
     TableHead,
     Skeleton
 } from "@mui/material";
-import {formatDate, formatMillisecondsToMinutesSeconds} from "../../dateTimeUtils.ts";
+import {formatDate, formatMillisecondsToMinutesSeconds} from "../../utils/dateTimeUtils.ts";
 import {usePodcastData} from "../../hooks/usePodcastData.ts";
 import {StyledTableCell, StyledTableRow} from "./styles.ts";
 import {Link, useLocation} from "react-router-dom";

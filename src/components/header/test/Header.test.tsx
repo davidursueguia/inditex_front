@@ -1,15 +1,12 @@
-import {render, screen} from "@testing-library/react";
-import {MemoryRouter} from "react-router-dom";
-import {QueryClient, QueryClientProvider} from "react-query";
+import {screen} from "@testing-library/react";
 import Header from "../Header.tsx";
-
-const queryClient = new QueryClient();
+import {renderWithProviders} from "../../../utils/testUtils.tsx";
 
 
 describe('Header', () => {
     it('should render correctly', () => {
-        render(<QueryClientProvider client={queryClient}><MemoryRouter>
-            <Header/></MemoryRouter></QueryClientProvider>);
+        renderWithProviders(
+            <Header/>);
         expect(screen.getByText('Podcaster')).toBeInTheDocument();
     });
 });
