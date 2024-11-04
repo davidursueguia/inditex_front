@@ -1,7 +1,8 @@
-import {Card, Skeleton} from "@mui/material";
+import { Skeleton} from "@mui/material";
 import Separator from "../ui/separator/Separator.tsx";
 import {Podcast} from "../../interfaces/Podcast.ts";
 import {Link} from "react-router-dom";
+import {Artist, DescriptionText, DescriptionTitle, StyledCard, Title} from "./styles.ts";
 
 interface Props {
     selectedPodcast: Podcast | undefined;
@@ -12,12 +13,12 @@ const PodcastInfoCard = (props: Props) => {
     const {selectedPodcast, isLoading} = props;
 
     return (
-        <Card style={{height: 'fit-content', padding: '20px', borderRadius: '8px'}}>
+        <StyledCard>
             {isLoading ? (
-                <Skeleton variant="rectangular" width="100%" height={200}/>
+                <Skeleton variant="rectangular" width="100%" height={200} />
             ) : (
                 selectedPodcast && (
-                    <div style={{textAlign: 'center'}}>
+                    <div style={{ textAlign: 'center' }}>
                         <Link to={'/podcast/' + selectedPodcast.id.attributes["im:id"]}>
                             <img
                                 alt={selectedPodcast["im:name"].label}
@@ -26,19 +27,17 @@ const PodcastInfoCard = (props: Props) => {
                             />
                             <Separator/>
                             <div style={{textAlign: 'left'}}>
-                                <h2 style={{fontSize: '1.5em', color: '#333', margin: '10px 0'}}>
-                                    {selectedPodcast["im:name"].label}
-                                </h2>
-                                <p style={{color: '#666', fontStyle: 'italic'}}>by {selectedPodcast["im:artist"].label}</p>
+                                <Title>{selectedPodcast["im:name"].label}</Title>
+                                <Artist>by {selectedPodcast["im:artist"].label}</Artist>
                             </div>
                         </Link>
-                        <Separator/>
-                        <h3 style={{textAlign: 'left'}}>Description:</h3>
-                        <p style={{fontSize: '1em', fontStyle: 'italic', color: '#666'}}>{selectedPodcast.summary.label}</p>
+                        <Separator />
+                        <DescriptionTitle>Description:</DescriptionTitle>
+                        <DescriptionText>{selectedPodcast.summary.label}</DescriptionText>
                     </div>
                 )
             )}
-        </Card>
+        </StyledCard>
     );
 };
 
