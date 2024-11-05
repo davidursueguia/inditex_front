@@ -1,4 +1,4 @@
-import styled from "@mui/material/styles/styled";
+import { styled } from "@mui/material";
 
 export const HeaderContainer = styled('div')`
     display: flex;

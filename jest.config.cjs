@@ -8,7 +8,7 @@ module.exports = {
     setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
-        '^.+\\.(js|jsx)$': 'babel-jest',
+        "^.+\\.[t|j]sx?$": "babel-jest",
     },
     moduleNameMapper: {
         '\\.(css|less|scss)$': 'identity-obj-proxy',

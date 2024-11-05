@@ -1,4 +1,4 @@
-import styled from "@mui/material/styles/styled";
+import { styled } from "@mui/material";
 
 export const Container = styled('div')`
     float: right;

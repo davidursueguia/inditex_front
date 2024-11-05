@@ -1,4 +1,4 @@
-import styled from "@mui/material/styles/styled";
+import { styled } from "@mui/material";
 
 export const Separator = styled('hr')`
     border: 1px solid #ddd;
