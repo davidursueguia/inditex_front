@@ -18,7 +18,6 @@ class PodcastService {
             });
 
             if (response.data) {
-                console.log('response.data.feed.entry', response.data.feed.entry);
                 return response.data.feed.entry;
             } else {
                 throw new Error('No contents in response');
@@ -40,7 +39,6 @@ class PodcastService {
             });
 
             if (response.data) {
-                console.log('response.data', response.data);
                 return response.data;
             } else {
                 throw new Error('No contents in response');
