@@ -13,17 +13,19 @@ export const PodcastEpisodeDetail = () => {
 
     return (
         <Container>
-            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading} />
+            <PodcastInfoCard selectedPodcast={selectedPodcast} isLoading={isLoading}/>
             <EpisodeCard>
                 {episode ? (
                     <>
                         <EpisodeTitle>{episode.trackName}</EpisodeTitle>
-                        <Separator />
+                        <Separator/>
                         <EpisodeDescription>
-                            {episode.shortDescription ? episode.shortDescription : episode.description}
+                            {episode.shortDescription || episode.description || "Description not available"}
                         </EpisodeDescription>
-                        <Separator />
-                        <PodcastPlayer episode={episode} />
+                        <Separator/>
+                        {episode?.episodeUrl && (
+                            <PodcastPlayer episode={episode}/>
+                        )}
                     </>
                 ) : (
                     <LoadingMessage>Loading episode details...</LoadingMessage>
