@@ -23,6 +23,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/**/*.{ts,tsx}"],
+  "include": ["src", "src/**/*.{ts,tsx}", "jest.d.ts"],
   "types": ["cypress", "jest", "vite/client", "@testing-library/jest-dom", "@types/testing-library__react"]
 }
