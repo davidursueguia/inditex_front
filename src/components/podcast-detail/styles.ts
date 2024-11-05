@@ -1,5 +1,4 @@
-import styled from '@mui/material/styles/styled';
-import {Card, TableCell, tableCellClasses, TableRow} from "@mui/material";
+import {Card, styled, TableCell, tableCellClasses, TableRow} from "@mui/material";
 import {Link} from "react-router-dom";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({

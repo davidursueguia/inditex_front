@@ -1,5 +1,4 @@
-import styled from '@mui/material/styles/styled';
-import {Card} from "@mui/material";
+import {Card, styled} from "@mui/material";
 
 export const StyledCard = styled(Card)`
     height: fit-content;
