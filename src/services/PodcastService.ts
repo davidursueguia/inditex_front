@@ -7,7 +7,7 @@ import {GetPodcastDetailResponse, GetTopPodcastsResponse} from "./interfaces.ts"
 //const baseUrl = 'https://cors-anywhere.herokuapp.com/'; //All origins no funciona en el momento de hacer la prueba. Paso a usar el servicio de cors-anywhere
 const baseUrl = '';
 class PodcastService {
-    static async getTopPodcasts(): Promise<GetTopPodcastsResponse> {
+    static async getTopPodcasts(): Promise<GetTopPodcastsResponse | undefined> {
         try {
             const url = `${baseUrl}https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json`;
             const response = await axios.get(url, {
@@ -27,7 +27,7 @@ class PodcastService {
         }
     }
 
-    static async getPodcastDetail(podcastId: string): Promise<GetPodcastDetailResponse> {
+    static async getPodcastDetail(podcastId: string): Promise<GetPodcastDetailResponse | undefined> {
         try {
             const url = `${baseUrl}https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
             const response = await axios.get(url, {
