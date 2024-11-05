@@ -1,50 +1,45 @@
-# React + TypeScript + Vite
+# Podcaster app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application that queries the top 100 podcasts from the iTunes API and displays them in a list. This list can be filtered in real time through a title and author search bar. You can access each podcast by clicking on them to view more information, including a list of all episodes. You can click on an episode to navigate to a view where you can listen to it. The API queries are cached for 24 hours, so each time a value is retrieved, it is stored in memory.
+## Get started
+1. Clone the Repository: Open a terminal and run the following command to clone the repository:
 
-Currently, two official plugins are available:
+   ```git clone https://github.com/davidursueguia/inditex_front.git ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Navigate to the Project Directory: Change to the project directory that you just cloned:
 
-## Expanding the ESLint configuration
+   ```cd inditex_front```
+3. Install Dependencies: Run the following command to install the project dependencies:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   ```npm install```
+4. Set Up CORS Access: To ensure that API requests work correctly, visit the following link and click on "Request temporary access to the demo server":
 
-- Configure the top-level `parserOptions` property like this:
+   ``` https://cors-anywhere.herokuapp.com/corsdemo ```
+5. Run the Project: Once you have completed the previous steps, you can start the project with the following command:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+   ```npm run dev```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+6. Run build: Run the following command to build the project:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```npm run build```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Tests
+
+Run the following command to run the tests:
+
+   ```npm run test```
+
+## Tools
+
+For the development of this app, the following tools have been used:
+
+- React Testing Library: A library for testing React components focusing on user interactions.
+- Jest: A JavaScript testing framework for writing unit and integration tests.
+- Axios: A promise-based HTTP client for making API requests.
+- Material UI: A React UI framework that offers pre-designed, customizable components.
+- Styled-Components: A library for styling React components using tagged template literals.
+- Vite: A modern build tool that provides fast development and optimized builds.
+
+## Author
+
+David Ursueguia
