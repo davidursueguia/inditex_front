@@ -20,11 +20,10 @@ class PodcastService {
             if (response.data) {
                 return response.data.feed.entry;
             } else {
-                throw new Error('No contents in response');
+                console.error('No contents in response');
             }
         } catch (error) {
             console.error('Error fetching top podcasts:', error);
-            throw error;
         }
     }
 
@@ -41,7 +40,7 @@ class PodcastService {
             if (response.data) {
                 return response.data;
             } else {
-                throw new Error('No contents in response');
+                console.error('No contents in response');
             }
         } catch (error) {
             console.error(`Error fetching podcast details for id ${podcastId}:`, error);
